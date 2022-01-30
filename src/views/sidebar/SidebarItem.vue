@@ -41,13 +41,13 @@
       font-weight: normal;
       font-size: 18px;
       transition: color .1s, font-size .1s, fill .5s;
+      text-align: center;
     }
 
     .sidebar__item-title {
       padding-top: 5px;
-      min-width: 50px;
+      min-width: 100px;
     }
-
     .sidebar__item:hover {
       color: #7be5dc;
       cursor: pointer;
@@ -59,7 +59,6 @@
 
     .sidebar__item.active .icon {
       fill: #7be5dc;
-      width: 28px;
     }
 
     .active {
