@@ -35,6 +35,7 @@ body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  font-family: "TT Commons", sans-serif;
 }
 
 /* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
@@ -75,4 +76,26 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+@font-face {
+  font-family: 'TT Commons';
+  src: url('fonts/TTCommons-Bold.eot');
+  src: local('TT Commons Bold'), local('TTCommons-Bold'),
+      url('fonts/TTCommons-Bold.eot?#iefix') format('embedded-opentype'),
+      url('fonts/TTCommons-Bold.woff') format('woff'),
+      url('fonts/TTCommons-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Commons';
+  src: url('fonts/TTCommons-Regular.eot');
+  src: local('TT Commons Regular'), local('TTCommons-Regular'),
+      url('fonts/TTCommons-Regular.eot?#iefix') format('embedded-opentype'),
+      url('fonts/TTCommons-Regular.woff') format('woff'),
+      url('fonts/TTCommons-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
