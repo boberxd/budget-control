@@ -9,7 +9,7 @@
 
 <script>
 
-import Sidebar from '@/views/Sidebar.vue'
+import Sidebar from '@/views/sidebar/Sidebar.vue'
 
 export default {
   name: 'Index',
@@ -24,40 +24,14 @@ export default {
 </script>
 
 <style>
+  .main {
+    display: flex;
+    height: 100vh;
+  }
 
-    .main {
-        display: flex;
-        height: 100vh;
-    }
-
-    .main__content {
-        background-color: #F8F8F8;
-        width: 100%;
-        padding: 25px;
-    }
-
-
-    /* SIDEBAR*/
-    .main__sidebar {
-        background-color: #F0F0F0;
-        min-width: 10%;
-    }
-
-    .sidebar__item {
+  .main__content {
+      background-color: #fafafb;
       width: 100%;
-      height: 50px;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #696969;
-      font-family: "Gill Sans", sans-serif;
-      font-weight: bold;
-    }
-
-    .sidebar__item:hover {
-      background-color:	#D3D3D3;
-      cursor: pointer;
-    }
-
+      padding: 25px;
+  }
 </style>
