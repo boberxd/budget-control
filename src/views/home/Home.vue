@@ -3,38 +3,79 @@
     <div class="home__title">
       <h1>Домашняя</h1>
     </div>
-    <div class="home__wallet">
-      <div class="home__wallet-name">
-        0000-0000-0000-0001
-      </div>
-      <div class="home__wallet-balance">
-        <div class="balance__value">
-          2560,57
+    <div class="home__main">
+      <!-- <div class="home__main-filters">
+        <div class="filter__item">
+          <div class="range">
+            <div class="range__main">
+              <div class="range__main-name">
+                Бюджет
+              </div>
+              <div class="range__main-input">
+                <input min="0" max="1000" value="50" type="range">
+              </div>
+            </div>
+            <div class="range__values">
+              0 — 0 ₽
+            </div>
+          </div>
         </div>
-        <div class="balance__currency">
-          РУБ
+        <div class="filter__item">
+          <filter-checkbox 
+            title="Питание"
+            :items="supplyList" 
+          />
         </div>
-      </div>
-      <div class="home__wallet-stats">
-        <div class="stats__value">
-          +40%
+        <div class="filter__item">
+          <filter-checkbox 
+            title="Удобства"
+            :items="convenienceList" 
+          />
         </div>
-        <div class="stats__title">
-          this week
+      </div> -->
+      <div class="home__main-list">
+        <div class="home__main-list-item" v-for="(item, key) in itemList" :key="key">
+          <div class="list-item__img">
+            <img src="../../img/unnamed.png" alt="альтернативный текст">
+          </div>
+          <div class="list-item__info">
+            <div class="list-item__info-upper">
+              <div class="info__upper-grade">
+                <div class="info__upper-grade-main">
+                  {{ item.grade }}
+                </div>
+                <div class="info__upper-grade-counter">
+                  {{ item.reviewCount }} отзывов
+                </div>
+              </div>
+              <div class="info__upper-title">{{ item.title }}</div>
+              <div class="info__upper-place">{{ item.place }}</div>
+            </div>
+            <div class="list-item__info-bottom">
+              <div class="list__bottom-description">
+                {{ item.description }}
+              </div>
+            </div>
+          </div>
+          <div class="list-item__order">
+            <div class="list-item__order-upper">
+              <div class="order__upper-counter">
+                Забронировано {{ item.orderCount }} раза за месяц
+              </div>
+              <div class="order__upper-description">
+                {{ item.additionalInformation }}
+              </div>
+            </div>
+            <div class="list-item__order-bottom">
+              <div class="order__bottom-price">
+                от {{ item.price }} руб.
+              </div>
+              <div class="order__bottom-additional">
+                вкл. топл. сбор: {{ item.fuelSurcharge }} руб.
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="home__chart">
-      <div class="home__chart-buttons">
-        <div class="buttons__item button_blue">
-          &#9679; Income
-        </div>
-        <div class="buttons__item button_red active">
-          &#9679; Expenses
-        </div>
-      </div>
-      <div class="home__chart-main">
-
       </div>
     </div>
   </div>
@@ -42,47 +83,263 @@
 
 <script>
 
+// import filterCheckbox from '@/views/filterCheckbox/filterCheckbox.vue'
+
 export default {
   name: 'Home',
+  // components: {'filter-checkbox': filterCheckbox},
+  data () {
+    return {
+      itemList: [
+        {
+          img: '../../img/antalya.png',
+          grade: '4.0',
+          reviewCount: 5,
+          title: 'IL Mercato Hotel & Spa',
+          place: 'Шарм-Эль-Шейх, Египет',
+          description: 'Отель имеет 318 номеров, состоит из одного здания и отдельно стоящих двухэтажных 2 зданий, 2 лифта. Отель построен в 2010 году, последняя реновация в 2018 году. До центра города Шарм-эль-Шейх - 7,8 км. До Международного аэропорта Шарм-эль-Шейх (Sharm el-Sheikh International Airport) - 19 км.',
+          orderCount: 185,
+          additionalInformation: '2 взрослых c 13 марта на 8 ночей, перелет включен',
+          price: 29050,
+          fuelSurcharge: 53
+        },
+        {
+          img: '../../img/eftaliya.png',
+          grade: '2.3',
+          reviewCount: 17,
+          title: 'KAMELIYA SELIN HOTEL',
+          place: 'Анталья, Турция',
+          description: 'Обновленный отель цепочки Eftalia расположен в 4 км от поселка Конаклы с развитой инфраструктурой. В 150 м от отеля находится собственный песчаный пляж — один из самых больших на Анталийском побережье, с уникальным развлекательным комплексом Eftalia Island. ',
+          orderCount: 56,
+          additionalInformation: 'Отель включен в Sun Family Club лето 2022.',
+          price: 57232,
+          fuelSurcharge: 6223
+        },
+        {
+          img: '../../img/eftaliya.png',
+          grade: '3.0',
+          reviewCount: 17,
+          title: 'ОТЕЛЬ ПРОМЕТЕЙ КЛУБ',
+          place: 'Анталья, Турция',
+          description: 'Обновленный отель цепочки Eftalia расположен в 4 км от поселка Конаклы с развитой инфраструктурой. В 150 м от отеля находится собственный песчаный пляж — один из самых больших на Анталийском побережье, с уникальным развлекательным комплексом Eftalia Island. ',
+          orderCount: 42,
+          additionalInformation: 'Отель включен в Sun Family Club лето 2022.',
+          price: 42000,
+          fuelSurcharge: 512
+        },
+        {
+          img: '../../img/eftaliya.png',
+          grade: '4.2',
+          reviewCount: 17,
+          title: 'CHAMPION HOLIDAY VILLAGE',
+          place: 'Анталья, Турция',
+          description: 'Обновленный отель цепочки Eftalia расположен в 4 км от поселка Конаклы с развитой инфраструктурой. В 150 м от отеля находится собственный песчаный пляж — один из самых больших на Анталийском побережье, с уникальным развлекательным комплексом Eftalia Island. ',
+          orderCount: 56,
+          additionalInformation: 'Отель включен в Sun Family Club лето 2022.',
+          price: 14772,
+          fuelSurcharge: 500
+        },
+        {
+          img: '../../img/eftaliya.png',
+          grade: '4.0',
+          reviewCount: 17,
+          title: 'PALMERAS BEACH HOTEL',
+          place: 'Анталья, Турция',
+          description: 'Обновленный отель цепочки Eftalia расположен в 4 км от поселка Конаклы с развитой инфраструктурой. В 150 м от отеля находится собственный песчаный пляж — один из самых больших на Анталийском побережье, с уникальным развлекательным комплексом Eftalia Island. ',
+          orderCount: 56,
+          additionalInformation: 'Отель включен в Sun Family Club лето 2022.',
+          price: 120000,
+          fuelSurcharge: 124
+        }
+      ],
+      convenienceList: [
+        { title: 'Близко к центру', checked: false },
+        { title: 'Отдых с детьми', checked: false },
+        { title: 'Идеально для пар', checked: false },
+        { title: 'Кондиционер', checked: false },
+        { title: 'Интернет', checked: false },
+        { title: 'Оздоровительные туры', checked: false },
+      ],
+
+      supplyList: [
+        { title: 'AI — всё включено', checked: false },
+        { title: 'BB — завтрак', checked: false },
+        { title: 'LHB — завтрак, обед', checked: false },
+        { title: 'FB — завтрак, обед, ужин', checked: false },
+        { title: 'HB — завтрак, ужин', checked: false },
+        { title: 'RO — без питания', checked: false },
+      ]
+    }
+  }
 }
 
 </script>
 
 <style>
-  .home__wallet {
-    height: 250px;
-    width: 450px;
-
-    background-color: #fff;
-    border: 1px solid #f6f7f8;
-    border-radius: 5px;
-
-    padding: 40px;
-    position: relative;
+  .home {
+    height: 100%;
+  }
+  .home__main {
+    height: 95%;
+    display: flex;
   }
 
-  .home__wallet-name {
-    color: #22214b;
-    font-size: 24px;
+  .home__main-filters {
+    height: 100%;
+    background-color: #fff;
+    width: 300px;
   }
   
-  .home__wallet-balance {
+  .filter__item {
+    border-bottom: 2px solid #fafafb;
+    min-height: 70px;
+    width: 100%;
+  }
+  
+  .range {
+    color: #25244e;
+ 
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .range__main {
+    display: flex;
+    justify-content: center;
     align-items: center;
   }
 
-  .balance__value {
-    font-size: 36px;
-    font-weight: bold;
-
-    margin-right: 5px;
+  .range__main-name {
+    padding-right: 10px;
   }
 
-  .home__wallet-stats {
-    position: absolute;
+  .range__values {
+    text-align: center;
+  }
 
-    bottom: 30px;
-    right: 40px;
+  .home__main-list {
+    height: 100%;
+    background-color: #fff;
+    width: 100%;
+    /* margin-left: 25px; */
+    padding: 25px;
+
+    overflow: auto;
+  }
+
+  .home__main-list-item {
+    height: 250px;
+    /* background-color: #fafafb; */
+    border: 2px solid #fafafb;
+    margin-bottom: 25px;
+
+    display: flex;
+    cursor: pointer;
+  }
+
+  .home__main-list-item:last-child {
+    margin-bottom: 0px;
+  }
+
+  .home__main-list-item:hover {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+
+  .list-item__img img {
+    width: 248px;
+    height: 248px;
+  }
+
+  .list-item__info {}
+
+  .list-item__info-upper {
+    padding: 10px;
+    height: 50%;
+    border-bottom: 2px solid #fafafb;
+    
+    position: relative;
+  }
+
+  .list-item__info-bottom {
+    padding: 10px;
+  }
+
+  .info__upper-title {
+    font-weight: 700;
+    font-size: 24px;
+  }
+
+  .info__upper-grade {
+    display: flex;
+    font-weight: 700;
+    color: #25244e;
+    margin-bottom: 2px;
+  }
+
+  .info__upper-place {
+    position: absolute;
+    bottom: 0;
+    color: #059bce;
+  }
+
+  .info__upper-grade-main {
+    background-color: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px 5px 3px 5px;
+
+    border-radius: 5px 0px 0px 5px;
+  }
+
+  .info__upper-grade-counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7;
+
+    padding: 3px 5px 3px 5px;
+    border-radius: 0 5px 5px 0px;
+    font-weight: 400;
+  }
+
+  .list__bottom-description {
+    height: 75px;
+    width: 780px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .list-item__order {
+    width: 500px;
+    height: 250px;
+    
+    border-left: 2px solid #fafafb;
+  }
+  .list-item__order-upper {
+    padding: 10px;
+    height: 50%;
+    border-bottom: 2px solid #fafafb;
+    
+    position: relative;
+  }
+  .order__upper-counter {
+    color: #059bce;
+    text-align: center;
+  }
+
+  .order__upper-description {
+    text-align: center;
+    color: #a4a4a4;
+  }
+
+  .list-item__order-bottom {
+    background-color: #059bce;
+    height: 50%;
 
     display: flex;
     flex-direction: column;
@@ -90,73 +347,20 @@ export default {
     align-items: center;
   }
 
-  .stats__value {
-    font-weight: bold;
-    color: #2bbb7b;
-  }
-
-  .home__wallet {
-    margin-bottom: 25px;
-  }
-  
-  .home__chart {
-    height: 600px;
-    width: 900px;
-
-    background-color: #fff;
-    border: 1px solid #f6f7f8;
-    border-radius: 5px;
-
-    padding: 25px;
-  }
-
-  .home__chart-buttons {
-    display: flex;
-
-    float: right;
-  }
-
-  .buttons__item {
-    width: 150px;
-    height: 30px;
-    
-    background-color: #ddfffb;
+  .order__bottom-price {
+    font-weight: 700;
+    font-size: 30px;
+    color: white;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
 
-    color: #5addcf;
-    font-weight: bold;
-    padding-top: 4px;
-
-    margin-left: 25px;
-    background-color: transparent;
-    cursor: pointer;
   }
 
-  .button_blue {
-    color: #5addcf;
+  .order__bottom-additional {
+    color: #ededed;
   }
 
-  .button_blue.active {
-    background-color: #ddfffb;
-  }
 
-  .button_blue:hover {
-    background-color: #ddfffb;
-  }
-  
-  .button_red {
-    color: #ff5668;
-  }
-
-  .button_red.active {
-    background-color: #ffdde1;
-  }
-
-  .button_red:hover {
-    background-color: #ffdde1;
-  }
 </style>
