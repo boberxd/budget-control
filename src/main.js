@@ -11,6 +11,7 @@ import 'firebase/database'
 firebase.initializeApp({
   apiKey: "AIzaSyAm0hZrxWy8jaSKU8Dp-K-G3MC9Kgc5gY4",
   authDomain: "vue-travel-agency-app.firebaseapp.com",
+  databaseURL: "https://vue-travel-agency-app-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "vue-travel-agency-app",
   storageBucket: "vue-travel-agency-app.appspot.com",
   messagingSenderId: "984631250318",

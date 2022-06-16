@@ -102,6 +102,7 @@
           {title: 'Домашняя', routeName: 'Home', icon: 'home'},
           // {title: 'Статистика', routeName: 'Statistics', icon: 'statistics'},
           {title: 'О нас', routeName: 'Categories', icon: 'categories'},
+          {title: 'Корзина', routeName: 'Purchases', icon: 'categories'},
         ]
       }
     }
