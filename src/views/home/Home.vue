@@ -3,6 +3,7 @@
     <div class="home__title">
       <h1>Домашняя</h1>
     </div>
+    <button @click="create()">Создать</button>
     <div class="home__main">
       <!-- <div class="home__main-filters">
         <div class="filter__item">
@@ -34,19 +35,19 @@
         </div>
       </div> -->
       <div class="home__main-list">
-        <div class="home__main-list-item" v-for="(item, key) in itemList" :key="key">
+        <div @click="order(item)" class="home__main-list-item" v-for="(item, key) in tasks" :key="key">
           <div class="list-item__img">
-            <img src="../../img/unnamed.png" alt="альтернативный текст">
+            <img :src="item.imgURL" alt="Неккоректный URL у картинки">
           </div>
           <div class="list-item__info">
             <div class="list-item__info-upper">
               <div class="info__upper-grade">
                 <div class="info__upper-grade-main">
-                  {{ item.grade }}
+                Оценка {{ item.grade }}
                 </div>
-                <div class="info__upper-grade-counter">
+                <!-- <div class="info__upper-grade-counter">
                   {{ item.reviewCount }} отзывов
-                </div>
+                </div> -->
               </div>
               <div class="info__upper-title">{{ item.title }}</div>
               <div class="info__upper-place">{{ item.place }}</div>
@@ -59,9 +60,9 @@
           </div>
           <div class="list-item__order">
             <div class="list-item__order-upper">
-              <div class="order__upper-counter">
+              <!-- <div class="order__upper-counter">
                 Забронировано {{ item.orderCount }} раза за месяц
-              </div>
+              </div> -->
               <div class="order__upper-description">
                 {{ item.additionalInformation }}
               </div>
@@ -92,9 +93,9 @@ export default {
     return {
       itemList: [
         {
-          img: '../../img/antalya.png',
+          img: 'https://project-seo.net/wp-content/uploads/2019/12/URL.png',
           grade: '4.0',
-          reviewCount: 5,
+          // reviewCount: 5,
           title: 'IL Mercato Hotel & Spa',
           place: 'Шарм-Эль-Шейх, Египет',
           description: 'Отель имеет 318 номеров, состоит из одного здания и отдельно стоящих двухэтажных 2 зданий, 2 лифта. Отель построен в 2010 году, последняя реновация в 2018 году. До центра города Шарм-эль-Шейх - 7,8 км. До Международного аэропорта Шарм-эль-Шейх (Sharm el-Sheikh International Airport) - 19 км.',
@@ -170,6 +171,54 @@ export default {
         { title: 'RO — без питания', checked: false },
       ]
     }
+  },
+  computed: {
+    tasks () {
+      return this.$store.state.task.tasks.filter(item => !item.user)
+    }
+  },
+  methods: {
+    create () {
+      const task = {
+        grade: prompt('Введите оценку') || 0.00,
+        title: prompt('Введите заголовок') || 'Заголовок без названия',
+        imgURL: prompt('Введите URL картинки') || 'https://pngimg.com/uploads/question_mark/small/question_mark_PNG80.png',
+        place: prompt('Введите местонахождение') || 'Местонахождение неизвестно',
+        description: prompt('Введите описание') || 'Без описания',
+        additionalInformation: prompt('Введите дополнительную информацию') || 'Без дополнительной информации',
+        price: prompt('Введите цену') || 0,
+        fuelSurcharge: prompt('Введите цену за топливный сбор') || 0,
+        user: null,
+      }
+     this.$store.dispatch('newTask', task).then(() => {
+      this.$store.dispatch('loadTasks')
+     })
+    },
+
+    order (item) {
+      const answer = confirm('Вы хотите заказать этот тур?')
+      
+      if(answer) {
+        this.$store.dispatch('editTask', {
+          id: item.id,
+          user: this.$store.state.user.user.id
+        }).then(() => {
+          this.$store.dispatch('loadTasks')
+        })
+        return;
+      }
+
+      const answer2 = confirm('Вы хотите удалить этот тур?')
+      if(answer2) {
+        this.$store.dispatch('deleteTask', item.id).then(() => {
+          this.$store.dispatch('loadTasks')
+        })
+        return;
+      }
+    }
+  },
+  created () {
+    this.$store.dispatch('loadTasks')
   }
 }
 

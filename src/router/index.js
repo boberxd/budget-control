@@ -37,6 +37,14 @@ const routes = [
           store.state.user ? next() : next('/login')
         }
       },
+      {
+        path: '/purchases',
+        name: 'Purchases',
+        component: () => import('@/views/purchases/Purchases.vue'),
+        beforeEnter (to, from, next) {
+          store.state.user ? next() : next('/login')
+        }
+      },
     ]
   },
 ]
