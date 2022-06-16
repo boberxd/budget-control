@@ -70,16 +70,20 @@
       </div>
     </div>
     <div v-if="user">
-    <sidebar-item 
-      v-for="(item, key) in this.sidebarItems"
-      :key="key"
-      :sidebarItem="{title: item.title, routeName: item.routeName, icon: item.icon}" 
-    />
+      <sidebar-item 
+        v-for="(item, key) in this.sidebarItems"
+        :key="key"
+        :sidebarItem="{title: item.title, routeName: item.routeName, icon: item.icon}" 
+      />
+      </div>
+      <sidebar-item 
+        v-if="user && !isAdmin"
+        :sidebarItem="{title: 'Корзина', routeName: 'Purchases', icon: 'categories'}" 
+      />
+      <sidebar-item 
+        :sidebarItem="{title: 'Авторизация', routeName: 'Login', icon: 'security'}" 
+      />
     </div>
-    <sidebar-item 
-      :sidebarItem="{title: 'Авторизация', routeName: 'Login', icon: 'security'}" 
-    />
-  </div>
 </template>
 
 <script>
@@ -93,7 +97,10 @@
     computed: {
       user () {
         return this.$store.state.user.user
-      }
+      },
+      isAdmin () {
+        return this.$store.state.user.user?.id === 'QF6HZYwCalcQid5PA8pamgNjGQY2'
+      },
     },
 
     data () {
@@ -102,7 +109,6 @@
           {title: 'Домашняя', routeName: 'Home', icon: 'home'},
           // {title: 'Статистика', routeName: 'Statistics', icon: 'statistics'},
           {title: 'О нас', routeName: 'Categories', icon: 'categories'},
-          {title: 'Корзина', routeName: 'Purchases', icon: 'categories'},
         ]
       }
     }
