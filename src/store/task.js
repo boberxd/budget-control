@@ -37,7 +37,7 @@ export default {
         const task = await firebase.database().ref('tasks').once('value')
         console.log(task.val())
         // Get value
-        const tasks = task.val()
+        const tasks = task.val() || []
         // New array
         const tasksArray = []
         // Get task key (id)

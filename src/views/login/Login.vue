@@ -58,12 +58,14 @@ export default {
         this.$store.dispatch('registerUser', user).then(() => {
         this.submitStatus = 'OK'
         }).catch((err) => {
+          alert(err.message)
           this.submitStatus = err.message
         })
       } else {
         this.$store.dispatch('signIn', user).then(() => {
         this.submitStatus = 'OK'
         }).catch((err) => {
+          alert(err.message)
           this.submitStatus = err.message
         })
       }

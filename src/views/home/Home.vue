@@ -3,7 +3,7 @@
     <div class="home__title">
       <h1>Домашняя</h1>
     </div>
-    <button @click="create()">Создать</button>
+    <button v-if="isAdmin" @click="create()">Создать</button>
     <div class="home__main">
       <!-- <div class="home__main-filters">
         <div class="filter__item">
@@ -34,7 +34,7 @@
           />
         </div>
       </div> -->
-      <div class="home__main-list">
+      <div v-if="tasks.length" class="home__main-list">
         <div @click="order(item)" class="home__main-list-item" v-for="(item, key) in tasks" :key="key">
           <div class="list-item__img">
             <img :src="item.imgURL" alt="Неккоректный URL у картинки">
@@ -78,6 +78,7 @@
           </div>
         </div>
       </div>
+      <div v-else class="home__main-list"><h3>Список туров пуст.</h3></div>
     </div>
   </div>
 </template>
@@ -173,6 +174,9 @@ export default {
     }
   },
   computed: {
+    isAdmin () {
+      return this.$store.state.user.user?.id === 'QF6HZYwCalcQid5PA8pamgNjGQY2'
+    },
     tasks () {
       return this.$store.state.task.tasks.filter(item => !item.user)
     }
@@ -196,7 +200,10 @@ export default {
     },
 
     order (item) {
-      const answer = confirm('Вы хотите заказать этот тур?')
+      let answer = null
+      if (!this.isAdmin) {
+        answer = confirm('Вы хотите заказать этот тур?')
+      }
       
       if(answer) {
         this.$store.dispatch('editTask', {
